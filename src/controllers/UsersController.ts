@@ -50,6 +50,11 @@ class UserController {
     const repository = getRepository(Users);
     const { displayName, email, password, image } = request.body;
 
+    if(!displayName){
+      return response.status(400)
+      .json({message: "displayName id required"});
+    }
+
     if( displayName.length < 8 ) {
       return response.status(400)
         .json({message: "displayName length must be at least 8 characters long"});

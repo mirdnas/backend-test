@@ -87,12 +87,12 @@ class PostController {
 
     const post = await repository.findOne({ where: { id: id }, relations:['user'] });
 
-    if( post.user.id !== userIdbyToken ){
-      return response.status(401).json({message:'Usuário não autorizado'})
-    }
-
     if(!post){
       return response.status(404).json({message: 'Post não existe'});
+    }
+
+    if( post.user.id !== userIdbyToken ){
+      return response.status(401).json({message:'Usuário não autorizado'})
     }
 
     post.title = title,
@@ -141,7 +141,7 @@ class PostController {
       userId: post.userId
     }
 
-    return response.json(resposta);
+    return response.status(201).json(resposta);
 
   }
 
