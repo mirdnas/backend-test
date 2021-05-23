@@ -30,6 +30,28 @@ class PostController {
     return response.json( allPosts );
   }
 
+  async destroy ( request : Request, response : Response ) {
+
+    const userIdbyToken = request.userId;
+    const repository = getRepository(Posts);
+    const { id } = request.params;
+
+    const post = await repository.findOne({ where: { id: id }, relations:['user'] });
+
+
+    if(!post){
+      return response.status(404).json({message:'post não existe'})
+    }
+
+    if( post.user.id !== userIdbyToken ){
+      return response.status(401).json({message:'Usuário não autorizado'})
+    }
+
+    repository.remove(post);
+    return response.status(204);
+
+  }
+
   async show ( request : Request, response : Response ) {
     const repository = getRepository(Posts);
 

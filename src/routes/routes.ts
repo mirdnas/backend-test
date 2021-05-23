@@ -20,6 +20,7 @@ router.get( '/post', authMiddleware, PostsController.index );
 router.get( '/post/search', authMiddleware, PostsController.search );
 router.get( '/post/:id', authMiddleware, PostsController.show );
 router.put( '/post/:id', authMiddleware, PostsController.update );
+router.delete( '/post/:id', authMiddleware, PostsController.destroy );
 
 
 
