@@ -48,7 +48,8 @@ class PostController {
     }
 
     await repository.remove(post);
-    return response.status(204);
+
+    return response.status(204).send();
 
   }
 
