@@ -1,0 +1,3 @@
+destroy está com problema não da a resposta esperada 
+update and published mudar o formato de dada no posts - timestamp iso 8601  
+na rota que traz os posts tem que mudar o nome de userId para Users 

@@ -17,13 +17,10 @@ export default function authMiddleware( request : Request, response : Response, 
 
   const token = authorization.replace('Bearer','').trim();
 
-
   try {
     const data = jwt.verify(token,'osegredo');
-
     const { id } = data as TokenPayload;
     request.userId = id;
-
     return next();
   } catch {
     return response.status(401)

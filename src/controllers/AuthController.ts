@@ -26,7 +26,7 @@ class AuthController {
       return response.status(400).json({message:'password is not allowed to be empty'});
     }
 
-    const user = await repository.findOne({where: {email}});
+    const user = await repository.findOne({ select: ['id','email','password'],  where: {email} });
 
     if(!user){
       return response.status(400).json({message:'Campos inválidos'});

@@ -1,9 +1,9 @@
-import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate} from "typeorm";
+import {Entity, BaseEntity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate} from "typeorm";
 import { MinLength, IsEmail, IsNotEmpty  } from 'class-validator';
 import bcrypt from 'bcryptjs';
 
 @Entity()
-export class Users {
+export class Users extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;

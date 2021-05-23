@@ -1,5 +1,14 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
+import { Users } from "./Users";
 @Entity()
 export class Posts {
 
@@ -12,14 +21,14 @@ export class Posts {
     @Column()
     content: string;
 
-    @Column()
-    userId: number;
+    @ManyToOne(() => Users)
+    @JoinColumn()
+    user: Users;
 
     @CreateDateColumn()
-    published: string;
+    published: Date;
 
-    @Column()
-    updated: string;
-
+    @UpdateDateColumn()
+    updated: Date;
 
 }
