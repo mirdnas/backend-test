@@ -18,7 +18,7 @@ export class Users {
     @IsNotEmpty({ message: 'is required' })
     email!: string;
 
-    @Column()
+    @Column({ select: false })
     @MinLength(6)
     @IsNotEmpty({ message: 'is required' })
     password: string;

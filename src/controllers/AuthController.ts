@@ -3,9 +3,6 @@ import { Users } from '../entity/Users';
 import { getRepository } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-// import {getManager} from "typeorm";
-// import {validate} from "class-validator";
-// import { User } from './entity/User';
 
 class AuthController {
 

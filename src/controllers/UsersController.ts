@@ -17,6 +17,31 @@ class UserController {
     return response.json( allUsers );
   }
 
+  async show( request : Request, response : Response ){
+    const repository = getRepository(Users);
+
+    // const userIdbyToken = request.userId;
+    const { id } = request.params;
+
+    const user = await repository.findOne({ where: { id: id } } );
+
+    if(!user){
+      return response.status(404).json({message: 'Usuário não existe'});
+    }
+    return response.json( user );
+  }
+
+  async destroy ( request : Request, response : Response ) {
+    const repository = getRepository(Users);
+    const userIdbyToken = request.userId;
+    const user = await repository.findOne({ where: { id: userIdbyToken } } );
+    if(!user){
+      return response.status(400).json({message:'usuario já deletado'})
+    }
+    await repository.remove(user);
+    return response.status(204);
+  }
+
   async store( request : Request, response : Response ){
     const repository = getRepository(Users);
     const { displayName, email, password, image } = request.body;
@@ -51,7 +76,7 @@ class UserController {
     //   return response.status(409).send('senha deverá conter 6 caracteres');
     // }
 
-    const userExist = await repository.findOne({where: {email}});
+    const userExist = await repository.findOne( {where: {email}} );
 
     if( userExist ){
       return response.status(409).json({message:'Usuário já existe'});

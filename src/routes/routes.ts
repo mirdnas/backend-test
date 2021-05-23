@@ -10,6 +10,8 @@ const router = Router();
 
 router.post( '/user', UserController.store );
 router.get( '/user', authMiddleware, UserController.index );
+router.get( '/user/:id', authMiddleware, UserController.show );
+router.delete( '/user/me', authMiddleware, UserController.destroy );
 
 router.post( '/login', AuthController.authenticate );
 
