@@ -47,7 +47,7 @@ class PostController {
       return response.status(401).json({message:'Usuário não autorizado'})
     }
 
-    repository.remove(post);
+    await repository.remove(post);
     return response.status(204);
 
   }

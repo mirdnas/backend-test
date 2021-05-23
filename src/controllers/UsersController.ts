@@ -33,16 +33,16 @@ class UserController {
 
   async destroy ( request : Request, response : Response ) {
 
-      const userIdbyToken = request.userId;
-      const repository = getRepository(Users);
-      const user = await repository.findOne({ where: { id: userIdbyToken } } );
+    const userIdbyToken = request.userId;
+    const repository = getRepository(Users);
+    const user = await repository.findOne({ where: { id: userIdbyToken } } );
 
-      if(!user){
-        return response.status(400).json({message:'usuario já deletado'})
-      }
+    if(!user){
+      return response.status(400).json({message:'usuario já deletado'})
+    }
 
-      repository.remove(user);
-      return response.status(204);
+    await repository.remove(user);
+    return response.status(204);
 
   }
 
