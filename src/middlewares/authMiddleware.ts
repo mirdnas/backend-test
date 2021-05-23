@@ -12,10 +12,11 @@ export default function authMiddleware( request : Request, response : Response, 
   const { authorization } = request.headers;
 
   if( !authorization ) {
-    return response.status(401).send();
+    return response.status(401).json({message:'Token não encontrado'});
   }
 
   const token = authorization.replace('Bearer','').trim();
+
 
   try {
     const data = jwt.verify(token,'osegredo');
@@ -25,7 +26,8 @@ export default function authMiddleware( request : Request, response : Response, 
 
     return next();
   } catch {
-    return response.status(401).send();
+    return response.status(401)
+      .json({message:'Token expirado ou inválido'});
   }
 
 }

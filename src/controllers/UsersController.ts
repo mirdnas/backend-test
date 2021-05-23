@@ -10,8 +10,11 @@ import jwt from 'jsonwebtoken';
 class UserController {
 
   async index( request : Request, response : Response ){
+    const repository = getRepository(Users);
     const userId = request.userId
-    return response.json({ message: userId });
+
+    const allUsers = await repository.find();
+    return response.json( allUsers );
   }
 
   async store( request : Request, response : Response ){

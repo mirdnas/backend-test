@@ -13,10 +13,6 @@ class AuthController {
     const repository = getRepository(Users);
     const { email, password } = request.body;
 
-    console.log('como e o body', );
-
-    response.status(100);
-
     if(typeof  request.body['email'] === 'undefined'){
       return response.status(400).json({message:'email is required'});
     }
